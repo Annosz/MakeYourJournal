@@ -1,0 +1,23 @@
+﻿<h1>Regisztrációs felület</h1>
+
+<div class="container">
+    <div class="form-group">
+            <input type="email"  placeholder="Email" [(ngModel)]="regist.email"/>
+    </div>
+    <div class="form-group">
+            <input placeholder="Felhasználónév" [(ngModel)]="regist.userName"/>
+    </div>
+    <div class="form-group">
+            <input type="password"  placeholder="Jelszó" [(ngModel)]="regist.password"/>
+    </div>
+    <div class="form-group">
+            <input type="password"  placeholder="Jelszó még egyszer" [(ngModel)]="regist.confirmPassword"/>
+    </div>
+    <button color="primary" (click)="registrate()">Regisztráció</button>
+
+    <div class="message" *ngIf="message">
+        <div class="text-danger" *ngIf="message?.succeeded == false">
+            <div *ngFor="let err of message?.errors">{{err.description}}</div>
+        </div>
+    </div>
+</div>

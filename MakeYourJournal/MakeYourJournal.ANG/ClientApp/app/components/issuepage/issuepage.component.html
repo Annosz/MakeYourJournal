@@ -1,0 +1,28 @@
+<h1>The newest issue</h1>
+
+<p>Articles, todos and notes connected to your newest issue.</p>
+
+{{ getArticlesForIssue() }}
+<p *ngIf="!articles"><em>Loading...</em></p>
+
+<div *ngFor="let article of articles">
+    <h4>{{ article.title }}</h4>
+
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Done</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let todo of article.todos">
+                <td><input type="checkbox" checked="{{todo.done}}"></td>
+                <td>{{ todo.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+

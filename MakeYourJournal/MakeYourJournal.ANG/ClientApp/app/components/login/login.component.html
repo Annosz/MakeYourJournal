@@ -1,0 +1,20 @@
+﻿<h1>Bejelentkezési felület</h1>
+
+<div class="container col-md-4">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Felhasználónév" [(ngModel)]="log.userName"/>
+    </div>
+    <div class="form-group">
+            <input type="password" placeholder="Jelszó" [(ngModel)]="log.password"/>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" [(ngModel)]="log.rememberMe">Emlékezz rám
+    </div>
+    <button md-raised-button color="primary" (click)="login()">Bejelentkezés</button>
+
+    <div class="message" *ngIf="message">
+        <div class="text-danger" *ngIf="message?.succeeded == false">
+            {{message?.description}}
+        </div>
+    </div>
+</div>

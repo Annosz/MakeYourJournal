@@ -1,12 +1,14 @@
 ﻿using MakeYourJournal.DAL.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace MakeYourJournal.DAL
 {
-    public class JournalDbContext : DbContext
+    public class JournalDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, long>
     {
         public JournalDbContext(DbContextOptions options) : base(options)
         {
@@ -21,6 +23,8 @@ namespace MakeYourJournal.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Issue>().ToTable("Issue");
             modelBuilder.Entity<Article>().ToTable("Article");
             modelBuilder.Entity<Item>().ToTable("Item");
@@ -36,5 +40,6 @@ namespace MakeYourJournal.DAL
             modelBuilder.Entity<Item>()
                 .HasDiscriminator<string>("ItemType");
         }
+
     }
 }

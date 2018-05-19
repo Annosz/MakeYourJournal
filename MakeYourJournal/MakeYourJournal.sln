@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakeYourJournal.DAL", "MakeYourJournal.DAL\MakeYourJournal.DAL.csproj", "{1AE8F221-4826-49AD-B73E-119BFDE380B3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakeYourJournal.ANG", "MakeYourJournal\MakeYourJournal.ANG.csproj", "{F9939BB7-554A-4977-9364-88C55E15A6E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakeYourJournal.ANG", "MakeYourJournal.ANG\MakeYourJournal.ANG.csproj", "{B3473F16-3244-4C3C-94B6-153D1B0FA4CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{1AE8F221-4826-49AD-B73E-119BFDE380B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AE8F221-4826-49AD-B73E-119BFDE380B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AE8F221-4826-49AD-B73E-119BFDE380B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9939BB7-554A-4977-9364-88C55E15A6E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9939BB7-554A-4977-9364-88C55E15A6E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9939BB7-554A-4977-9364-88C55E15A6E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9939BB7-554A-4977-9364-88C55E15A6E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3473F16-3244-4C3C-94B6-153D1B0FA4CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3473F16-3244-4C3C-94B6-153D1B0FA4CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3473F16-3244-4C3C-94B6-153D1B0FA4CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3473F16-3244-4C3C-94B6-153D1B0FA4CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

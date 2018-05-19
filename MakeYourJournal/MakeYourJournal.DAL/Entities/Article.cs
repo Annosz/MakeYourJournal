@@ -18,6 +18,7 @@ namespace MakeYourJournal.DAL.Entities
         public Issue Issue { get; set; }
         public int IssueId { get; set; }
 
-        public ICollection<Item> Items { get; set; }
+        public ICollection<Todo> Todos { get; set; }
+        public ICollection<Note> Notes { get; set; }
     }
 }
