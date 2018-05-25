@@ -19,17 +19,18 @@ namespace MakeYourJournal.DAL.Services
 
         public IEnumerable<Article> GetArticles()
         {
-            return DbContext.Articles.Include(a => a.Todos).Include(a => a.Notes).ToList();
+            return DbContext.Articles.Include(a => a.Items).ToList();
         }
 
         public IEnumerable<Article> GetArticlesByIssueId(int issueId)
         {
-            return DbContext.Articles.Where(a => a.IssueId == issueId).Include(a => a.Todos).Include(a => a.Notes).ToList();
+            var ret = DbContext.Articles.Where(a => a.IssueId == issueId).Include(a => a.Items).ToList();
+            return ret;
         }
 
         public Article GetArticle(int articleId)
         {
-            return DbContext.Articles.Include(a => a.Todos).Include(a => a.Notes).FirstOrDefault(a => a.Id == articleId)
+            return DbContext.Articles.Include(a => a.Items).FirstOrDefault(a => a.Id == articleId)
                 ?? throw new EntityNotFoundException("Article not found");
         }
 

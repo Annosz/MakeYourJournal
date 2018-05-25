@@ -162,6 +162,8 @@ namespace MakeYourJournal.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ArticleId");
+
                     b.ToTable("Item");
 
                     b.HasDiscriminator<string>("ItemType").HasValue("Item");
@@ -255,8 +257,6 @@ namespace MakeYourJournal.DAL.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(1000);
 
-                    b.HasIndex("ArticleId");
-
                     b.ToTable("Note");
 
                     b.HasDiscriminator().HasValue("Note");
@@ -268,8 +268,6 @@ namespace MakeYourJournal.DAL.Migrations
 
                     b.Property<bool>("Done");
 
-                    b.HasIndex("ArticleId");
-
                     b.ToTable("Todo");
 
                     b.HasDiscriminator().HasValue("Todo");
@@ -280,6 +278,14 @@ namespace MakeYourJournal.DAL.Migrations
                     b.HasOne("MakeYourJournal.DAL.Entities.Issue", "Issue")
                         .WithMany("Articles")
                         .HasForeignKey("IssueId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MakeYourJournal.DAL.Entities.Item", b =>
+                {
+                    b.HasOne("MakeYourJournal.DAL.Entities.Article", "Article")
+                        .WithMany("Items")
+                        .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -325,22 +331,6 @@ namespace MakeYourJournal.DAL.Migrations
                     b.HasOne("MakeYourJournal.DAL.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MakeYourJournal.DAL.Entities.Note", b =>
-                {
-                    b.HasOne("MakeYourJournal.DAL.Entities.Article", "Article")
-                        .WithMany("Notes")
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MakeYourJournal.DAL.Entities.Todo", b =>
-                {
-                    b.HasOne("MakeYourJournal.DAL.Entities.Article", "Article")
-                        .WithMany("Todos")
-                        .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

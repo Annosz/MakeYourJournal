@@ -21,9 +21,9 @@ namespace MakeYourJournal.DAL.Mapping
 
                 cfg.CreateMap<Article, ArticleModel>()
                     .AfterMap((a, dto, ctx) =>
-                        dto.Todos = a.Todos.Select(t => ctx.Mapper.Map<TodoModel>(t)))
+                        dto.Todos = a.Items.Where(i => i.GetType() == typeof(Todo)).Select(t => ctx.Mapper.Map<TodoModel>(t)))
                     .AfterMap((a, dto, ctx) =>
-                        dto.Notes = a.Notes.Select(t => ctx.Mapper.Map<NoteModel>(t)));
+                        dto.Notes = a.Items.Where(i => i.GetType() == typeof(Note)).Select(t => ctx.Mapper.Map<NoteModel>(t)));
                 cfg.CreateMap<ArticleModel, Article>();
 
                 cfg.CreateMap<Todo, TodoModel>()

@@ -1,6 +1,7 @@
 ﻿using MakeYourJournal.DAL;
 using MakeYourJournal.DAL.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MakeYourJournal.DAL.Seed
@@ -24,7 +25,45 @@ namespace MakeYourJournal.DAL.Seed
 
                 context.Issues.AddRange(Issues.Values);
                 context.Articles.AddRange(Articles.Values);
-                context.Todos.AddRange(data.Todos.Select(t => new Todo
+
+                //Mappint needs to be done from this way, otherwise TPH linking gets fucked up
+                foreach (Article article in Articles.Values)
+                {
+                    var todos = data.Todos.Where(t => t.ArticleTitle == article.Title).ToList();
+                    if (todos.Count != 0)
+                    {
+                        if (article.Items == null)
+                            article.Items = new List<Item>();
+
+                        var TodoList = article.Items.ToList();
+                        TodoList.AddRange(todos.Select(t => new Todo
+                        {
+                            Name = t.Name,
+                            Done = t.Done/*,
+                            Article = Articles[t.ArticleTitle]*/
+                        }));
+                        article.Items = TodoList;
+                    }
+                        
+
+                    var notes = data.Notes.Where(n => n.ArticleTitle == article.Title).ToList();
+                    if (notes.Count != 0)
+                    {
+                        if (article.Items == null)
+                            article.Items = new List<Item>();
+
+                        var NoteList = article.Items.ToList();
+                        NoteList.AddRange(notes.Select(n => new Note
+                        {
+                            Name = n.Name,
+                            Description = n.Description/*,
+                            Article = Articles[n.ArticleTitle]*/
+                        }));
+                        article.Items = NoteList;
+                    }
+                }
+
+                /*context.Todos.AddRange(data.Todos.Select(t => new Todo
                 {
                     Name = t.Name,
                     Done = t.Done,
@@ -35,7 +74,7 @@ namespace MakeYourJournal.DAL.Seed
                     Name = n.Name,
                     Description = n.Description,
                     Article = Articles[n.ArticleTitle]
-                }));
+                }));*/
 
                 return context.SaveChanges();
             }

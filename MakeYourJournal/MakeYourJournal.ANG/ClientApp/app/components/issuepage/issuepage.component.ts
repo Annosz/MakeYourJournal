@@ -26,6 +26,12 @@ export class IssuePageComponent {
         }, error => console.error(error));
     }
 
+    ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            this.paramsChanged(params['id']);
+        });
+    }
+
     getArticlesForIssue() {
     }
 }
