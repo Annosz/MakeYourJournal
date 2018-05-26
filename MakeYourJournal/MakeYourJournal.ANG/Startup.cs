@@ -72,7 +72,9 @@ namespace MakeYourJournal.ANG
 
             app.UseWhen(
                  ctx => ctx.Request.Path.HasValue && ctx.Request.Path.StartsWithSegments(new PathString("/api")),
-                 b => b.UseMiddleware<ApiExceptionHandlerMiddleware>()            );
+                 b => b.UseMiddleware<ApiExceptionHandlerMiddleware>()
+            );
+
 
             app.UseMvc(routes =>
             {

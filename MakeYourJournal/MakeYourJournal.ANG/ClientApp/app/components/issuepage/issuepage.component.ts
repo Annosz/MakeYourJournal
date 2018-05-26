@@ -6,12 +6,10 @@ import Todo from '../../models/todo.model';
 import Article from '../../models/article.model';
 
 @Component({
-    selector: 'issuepage',
+    selector: 'issue-page',
     templateUrl: './issuepage.component.html'
 })
 export class IssuePageComponent {
-    public issueId: number;
-    public todos: Todo[];
     public articles: Article[];
 
     constructor(
@@ -19,19 +17,15 @@ export class IssuePageComponent {
         @Inject('BASE_URL') private baseUrl: string,
         private activatedroute: ActivatedRoute)
     {
-        activatedroute.params.subscribe(params => { this.issueId = params['id']; });
-
-        this.http.get(this.baseUrl + 'api/Article/GetByIssue/' + this.issueId).subscribe(result => {
-            this.articles = result.json() as Article[];
-        }, error => console.error(error));
     }
 
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
-            this.paramsChanged(params['id']);
-        });
+        this.activatedroute.params.subscribe(params => { this.getArticlesForIssue(params['id']); });
     }
 
-    getArticlesForIssue() {
+    getArticlesForIssue(issueId: number) {
+        this.http.get(this.baseUrl + 'api/Article/GetByIssue/' + issueId).subscribe(result => {
+            this.articles = result.json() as Article[];
+        }, error => console.error(error));
     }
 }
