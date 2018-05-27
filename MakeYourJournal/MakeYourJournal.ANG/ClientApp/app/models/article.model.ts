@@ -1,4 +1,5 @@
-﻿import Todo from "../models/todo.model"
+﻿import Todo from "../models/todo.model";
+import Note from "../models/note.model";
 
 class Article {
     id: number;
@@ -8,6 +9,7 @@ class Article {
     todoCount: number;
     notesCount: number;
     todos: Todo[];
+    notes: Note[];
 }
 
 export default Article;

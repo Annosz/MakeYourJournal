@@ -1,6 +1,7 @@
-<h1>The newest issue</h1>
+<h1>{{ issue.volume }}/{{ issue.number }}. - {{ issue.name}}</h1>
 
-<p>Articles, todos and notes connected to your newest issue.</p>
+<p>{{ issue.description }}</p>
+<p><strong>Deadline: {{ issue.deadline | date:'yyyy. MM. dd.' }}</strong></p>
 
 <div *ngFor="let article of articles">
     <div class="panel panel-primary">
@@ -21,7 +22,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let todo of article.todos">
-                        <td><input type="checkbox" [checked]="todo.done"></td>
+                        <td><input type="checkbox" [checked]="todo.done" ></td>
                         <td>{{ todo.name }}</td>
                         <td>
                             <button class="btn btn-danger" type="button" (click)="deleteTodo(todo, article)">Delete Todo</button>
@@ -50,7 +51,7 @@
                         <td>{{ note.name }}</td>
                         <td>{{ note.description }}</td>
                         <td>
-                            <button class="btn btn-danger" type="button" (click)="deleteNote(note.id)">Delete Note</button>
+                            <button class="btn btn-danger" type="button" (click)="deleteNote(note, article)">Delete Note</button>
                         </td>
                     </tr>
                 </tbody>
@@ -60,7 +61,7 @@
                 <input type="text" class="form-control" placeholder="Name" [(ngModel)]="newNote.name" name="name">
                 <input type="text" class="form-control" placeholder="Description" [(ngModel)]="newNote.description" name="description">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button" (click)="addNote(article.id, newNote)">Add new Note</button>
+                    <button class="btn btn-primary" type="button" (click)="addNote(article, newNote)">Add new Note</button>
                 </span>
             </div>
 

@@ -2,15 +2,16 @@ import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import Issue from '../../models/issue.model';
 import Todo from '../../models/todo.model';
 import Note from '../../models/note.model';
 import Article from '../../models/article.model';
 
 import { NavMenuComponent } from '../navmenu/navmenu.component';
+import { IssueService } from '../../services/issue.service';
 import { ArticleService } from '../../services/article.service';
 import { TodoService } from '../../services/todo.service';
 import { NoteService } from '../../services/note.service';
-import { IssueService } from '../../services/issue.service';
 
 @Component({
     selector: 'issue-page',
@@ -18,6 +19,7 @@ import { IssueService } from '../../services/issue.service';
 })
 export class IssuePageComponent {
     public issueId: number;
+    public issue: Issue;
     public articles: Article[];
     public newArticle: Article;
     public newTodo: Todo;
@@ -46,6 +48,10 @@ export class IssuePageComponent {
     }
 
     getArticlesForIssue(issueId: number) {
+        this.issueService.getIssue(issueId)
+            .subscribe(data => {
+                this.issue = data;
+            }, error => console.log('Could not load issue.'));
         this.articleService.getAllArticle(issueId)
             .subscribe(data => {
                 this.articles = data;
@@ -83,13 +89,19 @@ export class IssuePageComponent {
         }
     }
 
-    addNote(articleId: number, note: Note) {
-        note.articleId = articleId;
-        this.noteService.addNote(note);
+    addNote(article: Article, note: Note) {
+        note.articleId = article.id;
+        this.noteService.addNote(note).subscribe(data => {
+            article.notes.push(data);
+        }, error => console.log('Could not add article.'));
     }
 
-    deleteNote(noteId: number) {
-        this.noteService.deleteNote(noteId);
+    deleteNote(note: Note, article: Article) {
+        this.noteService.deleteNote(note.id);
+        const index: number = article.notes.indexOf(note);
+        if (index !== -1) {
+            article.notes.splice(index, 1);
+        }
     }
 
     deleteIssue(issueId: number) {

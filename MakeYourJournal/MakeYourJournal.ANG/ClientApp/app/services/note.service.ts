@@ -1,5 +1,5 @@
 ﻿import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 
 import 'rxjs/add/operator/map'
@@ -8,10 +8,12 @@ import Note from '../models/note.model';
 
 @Injectable()
 export class NoteService {
+    private headers = new Headers();
 
     constructor(
         private http: Http,
         @Inject('BASE_URL') private baseUrl: string) {
+        this.headers.append('Content-Type', 'application/json; charset=utf-8');
     }
 
     getAllNote(articleId: number): Observable<Note[]> {
@@ -20,12 +22,15 @@ export class NoteService {
             .catch(this.handleError);
     }
 
-    addNote(newNote: Note) {
-        this.http.post(this.baseUrl + 'api/Note', JSON.stringify(newNote));
+    addNote(newNote: Note): Observable<Note> {
+        return this.http.post(this.baseUrl + 'api/Note', JSON.stringify(newNote), { headers: this.headers })
+            .map(response => response.json())
+            .catch(this.handleError);
     }
 
     deleteNote(noteId: number) {
-        this.http.delete(this.baseUrl + 'api/Note/' + noteId);
+        this.http.delete(this.baseUrl + 'api/Note/' + noteId)
+            .subscribe(data => { }, error => console.error('Could not delete note.'));
     }
 
     private handleError(error: any): Observable<any> {

@@ -22,6 +22,12 @@ export class IssueService {
             .catch(this.handleError);
     }
 
+    getIssue(issueId: number): Observable<Issue> {
+        return this.http.get(this.baseUrl + 'api/Issue/' + issueId)
+            .map(response => response.json())
+            .catch(this.handleError);
+    }
+
     addIssue(newIssue: Issue): Observable<Issue> {
         return this.http.post(this.baseUrl + 'api/Issue', JSON.stringify(newIssue), { headers: this.headers })
             .map(response => response.json())
