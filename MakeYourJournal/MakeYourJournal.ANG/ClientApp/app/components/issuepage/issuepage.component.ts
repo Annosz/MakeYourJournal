@@ -81,6 +81,10 @@ export class IssuePageComponent {
         }, error => console.log('Could not add article.'));
     }
 
+    todoChecked(todo: Todo) {
+        this.todoService.updateTodo(todo.id, todo).subscribe(data => { }, error => console.log('Could not add article.'));
+    }
+
     deleteTodo(todo: Todo, article: Article) {
         this.todoService.deleteTodo(todo.id);
         const index: number = article.todos.indexOf(todo);

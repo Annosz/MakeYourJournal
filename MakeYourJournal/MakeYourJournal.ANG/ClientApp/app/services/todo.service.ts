@@ -28,6 +28,12 @@ export class TodoService {
             .catch(this.handleError);
     }
 
+    updateTodo(todoId: number, todo: Todo): Observable<Todo> {
+        return this.http.put(this.baseUrl + 'api/Todo/' + todoId, JSON.stringify(todo), { headers: this.headers })
+            .map(response => response.json())
+            .catch(this.handleError);
+    }
+
     deleteTodo(todoId: number) {
         this.http.delete(this.baseUrl + 'api/Todo/' + todoId)
             .subscribe(data => { }, error => console.error('Could not delete todo.'));
