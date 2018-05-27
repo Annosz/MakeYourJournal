@@ -1,4 +1,4 @@
-import {Todo} from '../app/to-do/to-do';
+import {Todo} from '../app/models/to-do';
 
 export const TODO_ITEMS: Todo[] = [
  {

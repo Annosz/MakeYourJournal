@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Todo } from './to-do';
+import { Todo } from '../models/to-do';
 import { TODO_ITEMS } from '../../api/to-do-data';
 
 @Injectable()

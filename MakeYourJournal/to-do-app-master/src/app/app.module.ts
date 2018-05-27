@@ -3,8 +3,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ToDoComponent } from './to-do/to-do.component';
-import { TodoService } from './to-do/to-do.service';
+import { ToDoComponent } from './components/to-do.component';
+import { TodoService } from './services/to-do.service';
 import { FontsService } from '../fonts/fonts.service';
 
 @NgModule({
