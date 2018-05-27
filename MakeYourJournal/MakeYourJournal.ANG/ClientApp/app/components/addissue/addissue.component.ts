@@ -23,7 +23,7 @@ export class AddIssueComponent {
         this.newIssue = new Issue();
     }
 
-    addIssue() {
-        this.issueService.getIssues();
+    addIssue(issue: Issue) {
+        this.issueService.addIssue(issue);
     }
 }

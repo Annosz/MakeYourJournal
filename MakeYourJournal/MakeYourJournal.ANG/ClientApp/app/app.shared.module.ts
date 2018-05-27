@@ -15,6 +15,8 @@ import { IssuePageComponent } from './components/issuepage/issuepage.component';
 import { AccountService } from "./services/account.service";
 import { IssueService } from "./services/issue.service";
 import { ArticleService } from "./services/article.service";
+import { TodoService } from "./services/todo.service";
+import { NoteService } from "./services/note.service";
 
 @NgModule({
     declarations: [
@@ -43,7 +45,9 @@ import { ArticleService } from "./services/article.service";
     providers: [
         AccountService,
         IssueService,
-        ArticleService
+        ArticleService,
+        TodoService,
+        NoteService
     ]
 })
 export class AppModuleShared {

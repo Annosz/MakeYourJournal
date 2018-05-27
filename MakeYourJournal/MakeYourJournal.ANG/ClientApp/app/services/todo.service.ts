@@ -4,28 +4,28 @@ import { Observable } from "rxjs/Observable";
 
 import 'rxjs/add/operator/map'
 
-import Article from '../models/article.model';
+import Todo from '../models/todo.model';
 
 @Injectable()
-export class ArticleService {
+export class TodoService {
 
     constructor(
         private http: Http,
         @Inject('BASE_URL') private baseUrl: string) {
     }
 
-    getAllArticle(issueId: number): Observable<Article[]> {
-        return this.http.get(this.baseUrl + 'api/Article/GetByIssue/' + issueId)
+    getAllTodo(articleId: number): Observable<Todo[]> {
+        return this.http.get(this.baseUrl + 'api/Todo/GetByArticle/' + articleId)
             .map(response => response.json())
             .catch(this.handleError);
     }
 
-    addArticle(newArticle: Article) {
-        this.http.post(this.baseUrl + 'api/Article', JSON.stringify(newArticle));
+    addTodo(newTodo: Todo) {
+        this.http.post(this.baseUrl + 'api/Todo', JSON.stringify(newTodo));
     }
 
-    deleteArticle(articleId: number) {
-        this.http.delete(this.baseUrl + 'api/Article/' + articleId);
+    deleteTodo(todoId: number) {
+        this.http.delete(this.baseUrl + 'api/Todo/' + todoId);
     }
 
     private handleError(error: any): Observable<any> {

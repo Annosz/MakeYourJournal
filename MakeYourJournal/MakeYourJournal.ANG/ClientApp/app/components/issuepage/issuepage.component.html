@@ -2,27 +2,82 @@
 
 <p>Articles, todos and notes connected to your newest issue.</p>
 
-{{ getArticlesForIssue() }}
-<p *ngIf="!articles"><em>Loading...</em></p>
-
 <div *ngFor="let article of articles">
-    <h4>{{ article.title }}</h4>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
 
-    <table class='table'>
-        <thead>
-            <tr>
-                <th>Done</th>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let todo of article.todos">
-                <td><input type="checkbox" [checked]="todo.done"></td>
-                <td>{{ todo.name }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <h4>{{ article.title }}</h4>
+
+        </div>
+        <div class="panel-body">
+
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th class="col-md-1">Done</th>
+                        <th class="col-md-9">Name</th>
+                        <th class="col-md-2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let todo of article.todos">
+                        <td><input type="checkbox" [checked]="todo.done"></td>
+                        <td>{{ todo.name }}</td>
+                        <td>
+                            <button class="btn btn-danger" type="button" (click)="deleteTodo(todo.Id)">Delete Todo</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="input-group col-md-5">
+                <input type="text" class="form-control" placeholder="Name" [(ngModel)]="newTodo.name" name="name">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" (click)="addTodo(article.Id, newTodo)">Add new Todo</button>
+                </span>
+            </div>
+
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th class="col-md-3">Notes</th>
+                        <th class="col-md-7"></th>
+                        <th class="col-md-2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let note of article.notes">
+                        <td>{{ note.name }}</td>
+                        <td>{{ note.description }}</td>
+                        <td>
+                            <button class="btn btn-danger" type="button" (click)="deleteNote(note.Id)">Delete Note</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="input-group col-md-5">
+                <input type="text" class="form-control" placeholder="Name" [(ngModel)]="newNote.name" name="name">
+                <input type="text" class="form-control" placeholder="Description" [(ngModel)]="newNote.description" name="description">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" (click)="addNote(article.Id, newNote)">Add new Note</button>
+                </span>
+            </div>
+
+            <div class="text-right">
+                <button class="btn btn-danger" type="button" (click)="deleteArticle(article.Id)">Delete Article</button>
+            </div>
+
+        </div>
+    </div>
 
 </div>
 
-
+<h4>New article</h4>
+<div class="input-group col-md-5">
+    <input type="text" class="form-control" placeholder="Name" [(ngModel)]="newArticle.name" name="name">
+    <input type="text" class="form-control" placeholder="Topic" [(ngModel)]="newArticle.topic" name="topic">
+    <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" (click)="addArticle()">Add new article</button>
+    </span>
+</div>
