@@ -17,11 +17,13 @@ export class NavMenuComponent {
         private http: Http,
         private issueService: IssueService
     ) {
+    }
+
+    ngOnInit() {
         this.issueService.getIssues()
             .subscribe(data => {
                 this.issues = data;
             }, error => console.log('Could not load issues.'));
     }
-
 
 }

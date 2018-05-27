@@ -30,7 +30,7 @@ namespace MakeYourJournal.ANG.Controllers
         [ProducesResponseType(typeof(List<IssueModel>), (int)HttpStatusCode.OK)]
         public IActionResult Get()
         {
-            return Ok(Mapper.Map<List<IssueModel>>(IssueService.GetIssues()));
+            return Ok(Mapper.Map<List<IssueModel>>(IssueService.GetIssues()).OrderByDescending(i => i.AllTime));
         }
 
         [HttpGet("{id}")]

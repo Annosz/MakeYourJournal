@@ -46,8 +46,9 @@ namespace MakeYourJournal.ANG
             services.AddSingleton<IMapper>(MapperConfig.Configure());
 
             services.AddScoped<IIssueService, IssueService>();
-            services.AddScoped<ITodoService, TodoService>();
             services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<ITodoService, TodoService>();
+            services.AddScoped<INoteService, NoteService>();
 
             services.AddMvc();
         }

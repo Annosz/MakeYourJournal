@@ -29,7 +29,7 @@ namespace MakeYourJournal.DAL.Services
 
         public Todo GetTodo(int Id)
         {
-            return DbContext.Todos.Include(t => t.Article).FirstOrDefault(i => i.Id == Id)
+            return DbContext.Todos.Include(t => t.Article).FirstOrDefault(t => t.Id == Id)
                 ?? throw new EntityNotFoundException("Todo not found");
         }
 
@@ -39,7 +39,7 @@ namespace MakeYourJournal.DAL.Services
 
             DbContext.SaveChanges();
 
-            return Todo;
+            return GetTodo(Todo.Id);
         }
 
         public Todo UpdateTodo(int TodoId, Todo Todo)
@@ -51,7 +51,7 @@ namespace MakeYourJournal.DAL.Services
             try
             {
                 DbContext.SaveChanges();
-                return Todo;
+                return GetTodo(Todo.Id);
             }
             catch (DbUpdateConcurrencyException)
             {

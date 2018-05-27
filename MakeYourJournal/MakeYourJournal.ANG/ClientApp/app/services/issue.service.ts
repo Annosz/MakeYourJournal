@@ -1,5 +1,5 @@
 ﻿import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 
 import 'rxjs/add/operator/map'
@@ -8,10 +8,12 @@ import Issue from '../models/issue.model';
 
 @Injectable()
 export class IssueService {
+    private headers = new Headers();
 
     constructor(
         private http: Http,
         @Inject('BASE_URL') private baseUrl: string) {
+        this.headers.append('Content-Type', 'application/json; charset=utf-8');
     }
 
     getIssues(): Observable<Issue[]> {
@@ -20,8 +22,15 @@ export class IssueService {
             .catch(this.handleError);
     }
 
-    addIssue(newIssue: Issue) {
-        this.http.post(this.baseUrl + 'api/Issue', JSON.stringify(newIssue));
+    addIssue(newIssue: Issue): Observable<Issue> {
+        return this.http.post(this.baseUrl + 'api/Issue', JSON.stringify(newIssue), { headers: this.headers })
+            .map(response => response.json())
+            .catch(this.handleError);
+    }
+
+    deleteIssue(issueId: number) {
+        this.http.delete(this.baseUrl + 'api/Issue/' + issueId)
+            .subscribe(data => { }, error => console.error('Could not delete issue.'));
     }
 
     private handleError(error: any): Observable<any> {

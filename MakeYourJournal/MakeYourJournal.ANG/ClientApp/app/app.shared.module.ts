@@ -47,7 +47,8 @@ import { NoteService } from "./services/note.service";
         IssueService,
         ArticleService,
         TodoService,
-        NoteService
+        NoteService,
+        NavMenuComponent
     ]
 })
 export class AppModuleShared {

@@ -1,14 +1,16 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import Todo from '../../models/todo.model';
 import Note from '../../models/note.model';
 import Article from '../../models/article.model';
 
+import { NavMenuComponent } from '../navmenu/navmenu.component';
 import { ArticleService } from '../../services/article.service';
 import { TodoService } from '../../services/todo.service';
 import { NoteService } from '../../services/note.service';
+import { IssueService } from '../../services/issue.service';
 
 @Component({
     selector: 'issue-page',
@@ -23,10 +25,13 @@ export class IssuePageComponent {
 
     constructor(
         private http: Http,
+        private navMenu: NavMenuComponent,
         private articleService: ArticleService,
         private todoService: TodoService,
         private noteService: NoteService,
-        private activatedroute: ActivatedRoute)
+        private issueService: IssueService,
+        private activatedroute: ActivatedRoute,
+        private router: Router)
     {
         this.newArticle = new Article();
         this.newTodo = new Todo();
@@ -49,20 +54,33 @@ export class IssuePageComponent {
 
     addArticle(article: Article) {
         article.issueId = this.issueId;
-        this.articleService.addArticle(article);
+        this.articleService.addArticle(article)
+            .subscribe(data => {
+                this.articles.push(data);
+            }, error => console.log('Could not add article.'));
     }
 
-    deleteArticle(articleId: number) {
-        this.articleService.deleteArticle(articleId);
+    deleteArticle(article: Article) {
+        this.articleService.deleteArticle(article.id);
+        const index: number = this.articles.indexOf(article);
+        if (index !== -1) {
+            this.articles.splice(index, 1);
+        }
     }
 
-    addTodo(articleId: number, todo: Todo) {
-        todo.articleId = articleId;
-        this.todoService.addTodo(todo);
+    addTodo(article: Article, todo: Todo) {
+        todo.articleId = article.id;
+        this.todoService.addTodo(todo).subscribe(data => {
+            article.todos.push(data);
+        }, error => console.log('Could not add article.'));
     }
 
-    deleteTodo(todoId: number) {
-        this.todoService.deleteTodo(todoId);
+    deleteTodo(todo: Todo, article: Article) {
+        this.todoService.deleteTodo(todo.id);
+        const index: number = article.todos.indexOf(todo);
+        if (index !== -1) {
+            article.todos.splice(index, 1);
+        }
     }
 
     addNote(articleId: number, note: Note) {
@@ -72,5 +90,11 @@ export class IssuePageComponent {
 
     deleteNote(noteId: number) {
         this.noteService.deleteNote(noteId);
+    }
+
+    deleteIssue(issueId: number) {
+        this.issueService.deleteIssue(issueId);
+        this.navMenu.ngOnInit();
+        this.router.navigateByUrl('/home'); 
     }
 }

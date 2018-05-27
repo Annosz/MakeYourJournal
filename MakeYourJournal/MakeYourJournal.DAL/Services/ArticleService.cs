@@ -40,7 +40,7 @@ namespace MakeYourJournal.DAL.Services
 
             DbContext.SaveChanges();
 
-            return Article;
+            return GetArticle(Article.Id);
         }
 
         public Article UpdateArticle(int ArticleId, Article Article)
@@ -52,7 +52,7 @@ namespace MakeYourJournal.DAL.Services
             try
             {
                 DbContext.SaveChanges();
-                return Article;
+                return GetArticle(Article.Id);
             }
             catch (DbUpdateConcurrencyException)
             {

@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 
 import Issue from "../../models/issue.model"
 
+import { NavMenuComponent } from '../navmenu/navmenu.component';
 import { IssueService } from "../../services/issue.service"
 
 
@@ -16,7 +17,8 @@ export class AddIssueComponent {
 
     constructor(
         private http: Http,
-        private issueService: IssueService
+        private issueService: IssueService,
+        private navMenu: NavMenuComponent
     ) { }
 
     ngOnInit() {
@@ -24,6 +26,9 @@ export class AddIssueComponent {
     }
 
     addIssue(issue: Issue) {
-        this.issueService.addIssue(issue);
+        this.issueService.addIssue(issue)
+            .subscribe(data => {
+                this.navMenu.ngOnInit();
+            }, error => console.log('Could not add issue.'));
     }
 }

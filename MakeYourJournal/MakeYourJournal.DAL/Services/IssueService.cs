@@ -36,7 +36,7 @@ namespace MakeYourJournal.DAL.Services
 
             DbContext.SaveChanges();
 
-            return Issue;
+            return GetIssue(Issue.Id);
         }
 
         public Issue UpdateIssue(int IssueId, Issue Issue)
@@ -48,7 +48,7 @@ namespace MakeYourJournal.DAL.Services
             try
             {
                 DbContext.SaveChanges();
-                return Issue;
+                return GetIssue(Issue.Id);
             }
             catch (DbUpdateConcurrencyException)
             {
