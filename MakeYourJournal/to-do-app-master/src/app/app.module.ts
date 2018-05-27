@@ -3,7 +3,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ToDoComponent } from './components/to-do.component';
+import { ToDoComponent } from './components/todo/to-do.component';
+import { NavMenuComponent } from './components/navmenu/navmenu.component'
+
 import { TodoService } from './services/to-do.service';
 import { FontsService } from '../fonts/fonts.service';
 

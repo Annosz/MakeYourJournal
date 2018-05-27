@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let todo of article.todos">
-                <td><input type="checkbox" checked="{{todo.done}}"></td>
+                <td><input type="checkbox" [checked]="todo.done"></td>
                 <td>{{ todo.name }}</td>
             </tr>
         </tbody>

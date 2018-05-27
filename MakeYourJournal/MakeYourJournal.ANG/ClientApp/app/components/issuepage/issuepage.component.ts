@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import Todo from '../../models/todo.model';
 import Article from '../../models/article.model';
 
+import { ArticleService } from '../../services/article.service';
+
 @Component({
     selector: 'issue-page',
     templateUrl: './issuepage.component.html'
@@ -14,7 +16,7 @@ export class IssuePageComponent {
 
     constructor(
         private http: Http,
-        @Inject('BASE_URL') private baseUrl: string,
+        private articleService: ArticleService,
         private activatedroute: ActivatedRoute)
     {
     }
@@ -24,8 +26,6 @@ export class IssuePageComponent {
     }
 
     getArticlesForIssue(issueId: number) {
-        this.http.get(this.baseUrl + 'api/Article/GetByIssue/' + issueId).subscribe(result => {
-            this.articles = result.json() as Article[];
-        }, error => console.error(error));
+        this.articleService.getAllArticle(issueId).then(articles => this.articles = articles);
     }
 }

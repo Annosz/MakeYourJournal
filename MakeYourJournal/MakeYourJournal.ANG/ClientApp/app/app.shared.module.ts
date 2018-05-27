@@ -7,22 +7,24 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { IssuePageComponent } from './components/issuepage/issuepage.component';
-import { CounterComponent } from './components/counter/counter.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistComponent } from './components/regist/regist.component';
+import { AddIssueComponent } from './components/addissue/addissue.component';
+import { IssuePageComponent } from './components/issuepage/issuepage.component';
 
 import { AccountService } from "./services/account.service";
+import { IssueService } from "./services/issue.service";
+import { ArticleService } from "./services/article.service";
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        IssuePageComponent,
         HomeComponent,
         LoginComponent,
-        RegistComponent
+        RegistComponent,
+        AddIssueComponent,
+        IssuePageComponent
     ],
     imports: [
         CommonModule,
@@ -31,15 +33,17 @@ import { AccountService } from "./services/account.service";
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'issue-page/:id', component: IssuePageComponent },
             { path: 'login', component: LoginComponent },
             { path: 'regist', component: RegistComponent },
+            { path: 'add-issue', component: AddIssueComponent },
+            { path: 'issue-page/:id', component: IssuePageComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],
     providers: [
-        AccountService
+        AccountService,
+        IssueService,
+        ArticleService
     ]
 })
 export class AppModuleShared {

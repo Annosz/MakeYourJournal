@@ -27,18 +27,6 @@
                         <span class='glyphicon glyphicon-log-in'></span> Login
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']" *ngFor="let issue of issues">
-                    <a [routerLink]="['/issue-page', issue.id]">
-                        <span class='glyphicon glyphicon-th-list'></span> {{ issue.volume }}/{{ issue.number }}. - {{ issue.name }}
-                    </a>
-                </li>
-            </ul>
-            <ul class='nav navbar-btn'>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/add-issue']">
-                        <span class='glyphicon glyphicon-plus-sign'></span> Add issue
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
