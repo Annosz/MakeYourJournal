@@ -56,18 +56,20 @@ namespace MakeYourJournal.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Number = table.Column<int>(nullable: false),
+                    Volume = table.Column<int>(nullable: false),
                     AllTime = table.Column<int>(nullable: false),
+                    CopyNumber = table.Column<int>(nullable: false),
                     Deadline = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(maxLength: 500, nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: true),
-                    Number = table.Column<int>(nullable: false),
-                    Volume = table.Column<int>(nullable: false)
+                    ExpectedPageCount = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Issue", x => x.Id);
-                    table.UniqueConstraint("AK_Issue_AllTime", x => x.AllTime);
                     table.UniqueConstraint("AK_Issue_Volume_Number", x => new { x.Volume, x.Number });
+                    table.UniqueConstraint("AK_Issue_AllTime", x => x.AllTime);
                 });
 
             migrationBuilder.CreateTable(

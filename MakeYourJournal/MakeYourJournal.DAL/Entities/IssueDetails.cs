@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace MakeYourJournal.DAL.Dtos
+namespace MakeYourJournal.DAL.Entities
 {
-    public class IssueModel
+    public class IssueDetails
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
-        public int Volume { get; set; }
-        [Required]
-        public int Number { get; set; }
         [Display(Name = "All time issue number")]
         public int AllTime { get; set; }
         [StringLength(50)]
@@ -26,6 +24,6 @@ namespace MakeYourJournal.DAL.Dtos
         [Display(Name = "Number of copies")]
         public int CopyNumber { get; set; }
 
-        public int ArticleCount { get; set; }
+        public Issue Issue { get; set; }
     }
 }

@@ -40,6 +40,18 @@
         </div>
     </div>
     <div class="row">
+        <div class="form-group col-md-2">
+            <label>Expected page number</label>
+            <input type="number" class="form-control" placeholder="Expected page number" [(ngModel)]="newIssue.expectedPageCount" name="expectedPageCount">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label>Copy number</label>
+            <input type="number" class="form-control" placeholder="Copy number" [(ngModel)]="newIssue.copyNumber" name="copyNumber">
+        </div>
+    </div>
+    <div class="row">
         <button type="button" class="btn-primary" (click)="addIssue(newIssue)">Add Issue</button>
     </div>
 </form>

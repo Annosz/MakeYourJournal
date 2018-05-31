@@ -16,8 +16,25 @@ namespace MakeYourJournal.DAL.Mapping
             {
                 cfg.CreateMap<Issue, IssueModel>()
                     .AfterMap((i, dto) =>
-                        dto.ArticleCount = i.Articles.Count);
-                cfg.CreateMap<IssueModel, Issue>();
+                        {
+                            dto.ArticleCount = i.Articles.Count;
+                            dto.AllTime = i.IssueDetails.AllTime;
+                            dto.Name = i.IssueDetails.Name;
+                            dto.Deadline = i.IssueDetails.Deadline;
+                            dto.Description = i.IssueDetails.Description;
+                            dto.ExpectedPageCount = i.IssueDetails.ExpectedPageCount;
+                            dto.CopyNumber = i.IssueDetails.CopyNumber;
+                        });
+                cfg.CreateMap<IssueModel, Issue>()
+                    .AfterMap((dto, i) => i.IssueDetails = new IssueDetails
+                    {
+                        AllTime = dto.AllTime,
+                        Name = dto.Name,
+                        Deadline = dto.Deadline,
+                        Description = dto.Description,
+                        ExpectedPageCount = dto.ExpectedPageCount,
+                        CopyNumber = dto.CopyNumber,
+                    });
 
                 cfg.CreateMap<Article, ArticleModel>()
                     .AfterMap((a, dto, ctx) =>

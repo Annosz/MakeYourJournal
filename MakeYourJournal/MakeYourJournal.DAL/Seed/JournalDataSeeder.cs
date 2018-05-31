@@ -15,12 +15,25 @@ namespace MakeYourJournal.DAL.Seed
                 var data = dataAccessor();
 
 
-                var Issues = data.Issues.ToDictionary(i => i.AllTime, i => i);
+                var Issues = data.Issues.ToDictionary(i => i.AllTime, i => new Issue
+                {
+                    Volume = i.Volume,
+                    Number = i.Number,
+                    IssueDetails = new IssueDetails
+                    {
+                        AllTime = i.AllTime,
+                        Deadline = i.Deadline,
+                        Name = i.Name,
+                        Description = i.Description,
+                        ExpectedPageCount = i.ExpectedPageCount,
+                        CopyNumber = i.CopyNumber
+                    }
+                });
                 var Articles = data.Articles.ToDictionary(a => a.Title, a => new Article
                 {
                     Title = a.Title,
                     Topic = a.Topic,
-                    Issue = Issues[a.IssueAllTimeNumber]
+                    Issue = Issues[a.AllTime]
                 });
 
                 context.Issues.AddRange(Issues.Values);
@@ -39,8 +52,7 @@ namespace MakeYourJournal.DAL.Seed
                         TodoList.AddRange(todos.Select(t => new Todo
                         {
                             Name = t.Name,
-                            Done = t.Done/*,
-                            Article = Articles[t.ArticleTitle]*/
+                            Done = t.Done
                         }));
                         article.Items = TodoList;
                     }
@@ -56,25 +68,11 @@ namespace MakeYourJournal.DAL.Seed
                         NoteList.AddRange(notes.Select(n => new Note
                         {
                             Name = n.Name,
-                            Description = n.Description/*,
-                            Article = Articles[n.ArticleTitle]*/
+                            Description = n.Description
                         }));
                         article.Items = NoteList;
                     }
                 }
-
-                /*context.Todos.AddRange(data.Todos.Select(t => new Todo
-                {
-                    Name = t.Name,
-                    Done = t.Done,
-                    Article = Articles[t.ArticleTitle]
-                }));
-                context.Notes.AddRange(data.Notes.Select(n => new Note
-                {
-                    Name = n.Name,
-                    Description = n.Description,
-                    Article = Articles[n.ArticleTitle]
-                }));*/
 
                 return context.SaveChanges();
             }

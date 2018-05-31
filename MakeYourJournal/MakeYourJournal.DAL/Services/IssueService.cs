@@ -21,12 +21,12 @@ namespace MakeYourJournal.DAL.Services
 
         public IEnumerable<Issue> GetIssues()
         {
-            return DbContext.Issues.Include(i => i.Articles).ToList();
+            return DbContext.Issues.Include(i => i.IssueDetails).Include(i => i.Articles).ToList();
         }
 
         public Issue GetIssue(int Id)
         {
-            return DbContext.Issues.Include(i => i.Articles).FirstOrDefault(i => i.Id == Id)
+            return DbContext.Issues.Include(i => i.IssueDetails).Include(i => i.Articles).FirstOrDefault(i => i.Id == Id)
                 ?? throw new EntityNotFoundException("Issue not found");
         }
 
@@ -59,6 +59,7 @@ namespace MakeYourJournal.DAL.Services
         public void DeleteIssue(int IssueId)
         {
             DbContext.Issues.Remove(new Issue { Id = IssueId });
+            DbContext.IssueDetails.Remove(new IssueDetails { Id = IssueId });
 
             try
             {

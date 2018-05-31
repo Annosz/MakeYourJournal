@@ -1,6 +1,6 @@
 <h1>{{ issue.volume }}/{{ issue.number }}. - {{ issue.name}}</h1>
 
-<p>{{ issue.description }}</p>
+<p>{{ issue.description }} Expected page count is {{ issue.expectedPageCount}}, with a copy number of {{ issue.copyNumber }}.</p>
 <p><strong>Deadline: {{ issue.deadline | date:'yyyy. MM. dd.' }}</strong></p>
 
 <div *ngFor="let article of articles">

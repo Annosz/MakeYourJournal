@@ -6,20 +6,20 @@ namespace MakeYourJournal.DAL.Seed
 {
     public class JournalSeedData
     {
-        public Issue[] Issues { get; set; } =
+        public IssueSeedDto[] Issues { get; set; } =
         {
-            new Issue { Volume = 45, Number = 6, Name = "Nyári szám", Description = "A 2017/2018-as tavaszi félév utolsó, közéleti száma.", AllTime = 477, Deadline = new DateTime(2018, 4, 8)},
-            new Issue { Volume = 45, Number = 5, Name = "Simonyi szám", Description = "A 2018-as Simonyi Konferencia hivatalos kiadványa.", AllTime = 476, Deadline = new DateTime(2018, 3, 11)}
+            new IssueSeedDto { Volume = 45, Number = 6, Name = "Nyári szám", Description = "A 2017/2018-as tavaszi félév utolsó, közéleti száma.", AllTime = 477, Deadline = new DateTime(2018, 4, 8), ExpectedPageCount = 36, CopyNumber = 800},
+            new IssueSeedDto { Volume = 45, Number = 5, Name = "Simonyi szám", Description = "A 2018-as Simonyi Konferencia hivatalos kiadványa.", AllTime = 476, Deadline = new DateTime(2018, 3, 11), ExpectedPageCount = 48, CopyNumber = 1500}
         };
 
         public ArticleSeedDto[] Articles { get; set; } =
         {
-            new ArticleSeedDto { Title = "Most akkor mit is kell zsebre tenni?", Topic = "Konferencia főrendezői interjú", IssueAllTimeNumber = 476},
-            new ArticleSeedDto { Title = "A Schönherz óriáskijelző titkai", Topic = "Interjú Kiss Ádámmal", IssueAllTimeNumber = 476},
-            new ArticleSeedDto { Title = "Nézz mélyebbre!", Topic = "Body kiállítás", IssueAllTimeNumber = 477},
-            new ArticleSeedDto { Title = "Az 1%, aki mindent használ grafikából", Topic = "Interjú Gulyás Gergellyel", IssueAllTimeNumber = 477},
-            new ArticleSeedDto { Title = "Újra kell gondolni a szabályozást?", Topic = "ESZK vendégcikk", IssueAllTimeNumber = 477},
-            new ArticleSeedDto { Title = "Római Vakáció", Topic = "Timi és Bence utazása", IssueAllTimeNumber = 477}
+            new ArticleSeedDto { Title = "Most akkor mit is kell zsebre tenni?", Topic = "Konferencia főrendezői interjú", AllTime = 476},
+            new ArticleSeedDto { Title = "A Schönherz óriáskijelző titkai", Topic = "Interjú Kiss Ádámmal", AllTime = 476},
+            new ArticleSeedDto { Title = "Nézz mélyebbre!", Topic = "Body kiállítás", AllTime = 477},
+            new ArticleSeedDto { Title = "Az 1%, aki mindent használ grafikából", Topic = "Interjú Gulyás Gergellyel", AllTime = 477},
+            new ArticleSeedDto { Title = "Újra kell gondolni a szabályozást?", Topic = "ESZK vendégcikk", AllTime = 477},
+            new ArticleSeedDto { Title = "Római Vakáció", Topic = "Timi és Bence utazása", AllTime = 477}
         };
 
         public TodoSeedDto[] Todos { get; set; } =
@@ -41,12 +41,24 @@ namespace MakeYourJournal.DAL.Seed
             new NoteSeedDto {Name = "Youtube link", Description = "A játék lanch trailerje szerepeljen QR kóddal és youtube linkkel a cikk végén", ArticleTitle = "Az 1%, aki mindent használ grafikából"}
         };
 
+        public class IssueSeedDto
+        {
+            public int Volume { get; set; }
+            public int Number { get; set; }
+            public int AllTime { get; set; }
+            public string Name { get; set; }
+            public DateTime Deadline { get; set; }
+            public string Description { get; set; }
+            public int ExpectedPageCount { get; set; }
+            public int CopyNumber { get; set; }
+        }
+
         public class ArticleSeedDto
         {
             public string Title { get; set; }
             public string Topic { get; set; }
 
-            public int IssueAllTimeNumber { get; set; }
+            public int AllTime { get; set; }
         }
 
         public class TodoSeedDto

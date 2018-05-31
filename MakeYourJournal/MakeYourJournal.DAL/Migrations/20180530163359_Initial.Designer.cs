@@ -12,7 +12,7 @@ using System;
 namespace MakeYourJournal.DAL.Migrations
 {
     [DbContext(typeof(JournalDbContext))]
-    [Migration("20180525180137_Initial")]
+    [Migration("20180530163359_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,26 +123,39 @@ namespace MakeYourJournal.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AllTime");
-
-                    b.Property<DateTime>("Deadline");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500);
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(50);
-
                     b.Property<int>("Number");
 
                     b.Property<int>("Volume");
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("AllTime");
-
-
                     b.HasAlternateKey("Volume", "Number");
+
+                    b.ToTable("Issue");
+                });
+
+            modelBuilder.Entity("MakeYourJournal.DAL.Entities.IssueDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AllTime");
+
+                    b.Property<int>("CopyNumber");
+
+                    b.Property<DateTime>("Deadline");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500);
+
+                    b.Property<int>("ExpectedPageCount");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("AllTime");
 
                     b.ToTable("Issue");
                 });
@@ -279,6 +292,14 @@ namespace MakeYourJournal.DAL.Migrations
                     b.HasOne("MakeYourJournal.DAL.Entities.Issue", "Issue")
                         .WithMany("Articles")
                         .HasForeignKey("IssueId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MakeYourJournal.DAL.Entities.Issue", b =>
+                {
+                    b.HasOne("MakeYourJournal.DAL.Entities.IssueDetails", "IssueDetails")
+                        .WithOne("Issue")
+                        .HasForeignKey("MakeYourJournal.DAL.Entities.Issue", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
