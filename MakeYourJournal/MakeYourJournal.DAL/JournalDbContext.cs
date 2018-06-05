@@ -33,11 +33,18 @@ namespace MakeYourJournal.DAL
             modelBuilder.Entity<Note>().ToTable("Note");
             modelBuilder.Entity<Todo>().ToTable("Todo");
 
+            //Alternate key
             modelBuilder.Entity<Issue>()
-                .HasAlternateKey(i => new { i.Volume, i.Number });
-            modelBuilder.Entity<IssueDetails>()
                 .HasAlternateKey(d => new { d.AllTime });
+            modelBuilder.Entity<Article>()
+                .HasOne(a => a.Issue)
+                .WithMany(i => i.Articles)
+                .HasForeignKey(a => a.IssueAllTime)
+                .HasPrincipalKey(i => i.AllTime);
+            /*modelBuilder.Entity<IssueDetails>()
+                .HasAlternateKey(i => new { i.Volume, i.Number });*/
 
+            //Table splitting
             modelBuilder.Entity<Issue>()
                 .HasKey(i => i.Id);
             modelBuilder.Entity<Issue>()
@@ -47,7 +54,7 @@ namespace MakeYourJournal.DAL
             modelBuilder.Entity<IssueDetails>()
                 .HasOne(d => d.Issue).WithOne(i => i.IssueDetails).HasForeignKey<Issue>(d => d.Id);
             
-
+            //TPH with named discriminator
             modelBuilder.Entity<Item>()
                 .HasDiscriminator<string>("ItemType");
         }

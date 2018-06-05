@@ -18,7 +18,8 @@ namespace MakeYourJournal.DAL.Mapping
                     .AfterMap((i, dto) =>
                         {
                             dto.ArticleCount = i.Articles.Count;
-                            dto.AllTime = i.IssueDetails.AllTime;
+                            dto.Number = i.IssueDetails.Number;
+                            dto.Volume = i.IssueDetails.Volume;
                             dto.Name = i.IssueDetails.Name;
                             dto.Deadline = i.IssueDetails.Deadline;
                             dto.Description = i.IssueDetails.Description;
@@ -28,7 +29,8 @@ namespace MakeYourJournal.DAL.Mapping
                 cfg.CreateMap<IssueModel, Issue>()
                     .AfterMap((dto, i) => i.IssueDetails = new IssueDetails
                     {
-                        AllTime = dto.AllTime,
+                        Number = dto.Number,
+                        Volume = dto.Volume,
                         Name = dto.Name,
                         Deadline = dto.Deadline,
                         Description = dto.Description,

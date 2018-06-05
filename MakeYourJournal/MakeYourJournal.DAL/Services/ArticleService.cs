@@ -22,9 +22,9 @@ namespace MakeYourJournal.DAL.Services
             return DbContext.Articles.Include(a => a.Items).ToList();
         }
 
-        public IEnumerable<Article> GetArticlesByIssueId(int issueId)
+        public IEnumerable<Article> GetArticlesByAllTimeNumber(int allTime)
         {
-            var ret = DbContext.Articles.Where(a => a.IssueId == issueId).Include(a => a.Items).ToList();
+            var ret = DbContext.Articles.Where(a => a.IssueAllTime == allTime).Include(a => a.Items).ToList();
             return ret;
         }
 

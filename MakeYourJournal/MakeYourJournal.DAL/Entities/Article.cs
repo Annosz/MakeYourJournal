@@ -16,7 +16,7 @@ namespace MakeYourJournal.DAL.Entities
 
         [Required]
         public Issue Issue { get; set; }
-        public int IssueId { get; set; }
+        public int IssueAllTime { get; set; }
 
         public ICollection<Item> Items { get; set; }
     }

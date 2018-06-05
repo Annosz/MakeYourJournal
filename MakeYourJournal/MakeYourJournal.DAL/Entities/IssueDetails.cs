@@ -10,8 +10,10 @@ namespace MakeYourJournal.DAL.Entities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Display(Name = "All time issue number")]
-        public int AllTime { get; set; }
+        [Required]
+        public int Volume { get; set; }
+        [Required]
+        public int Number { get; set; }
         [StringLength(50)]
         public string Name { get; set; }
         [Required]

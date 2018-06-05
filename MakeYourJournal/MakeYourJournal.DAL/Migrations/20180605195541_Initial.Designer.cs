@@ -12,7 +12,7 @@ using System;
 namespace MakeYourJournal.DAL.Migrations
 {
     [DbContext(typeof(JournalDbContext))]
-    [Migration("20180530163359_Initial")]
+    [Migration("20180605195541_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -102,7 +102,7 @@ namespace MakeYourJournal.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("IssueId");
+                    b.Property<int>("IssueAllTime");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -113,7 +113,7 @@ namespace MakeYourJournal.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IssueId");
+                    b.HasIndex("IssueAllTime");
 
                     b.ToTable("Article");
                 });
@@ -123,13 +123,9 @@ namespace MakeYourJournal.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Number");
-
-                    b.Property<int>("Volume");
+                    b.Property<int>("AllTime");
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("Volume", "Number");
 
                     b.ToTable("Issue");
                 });
@@ -138,8 +134,6 @@ namespace MakeYourJournal.DAL.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AllTime");
 
                     b.Property<int>("CopyNumber");
 
@@ -153,9 +147,11 @@ namespace MakeYourJournal.DAL.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(50);
 
-                    b.HasKey("Id");
+                    b.Property<int>("Number");
 
-                    b.HasAlternateKey("AllTime");
+                    b.Property<int>("Volume");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Issue");
                 });
@@ -291,7 +287,8 @@ namespace MakeYourJournal.DAL.Migrations
                 {
                     b.HasOne("MakeYourJournal.DAL.Entities.Issue", "Issue")
                         .WithMany("Articles")
-                        .HasForeignKey("IssueId")
+                        .HasForeignKey("IssueAllTime")
+                        .HasPrincipalKey("AllTime")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20180517173323_IssueAlternateKeys.cs" />
     <Compile Remove="Migrations\20180524102801_Initial.cs" />
     <Compile Remove="Migrations\20180525180137_Initial.cs" />
+    <Compile Remove="Migrations\20180605141434_Initial.cs" />
+    <Compile Remove="Migrations\20180605164655_Initial.cs" />
   </ItemGroup>
 
   <ItemGroup>

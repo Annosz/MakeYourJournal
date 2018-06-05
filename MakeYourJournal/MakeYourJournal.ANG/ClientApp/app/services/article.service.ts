@@ -16,8 +16,8 @@ export class ArticleService {
         this.headers.append('Content-Type', 'application/json; charset=utf-8');
     }
 
-    getAllArticle(issueId: number): Observable<Article[]> {
-        return this.http.get(this.baseUrl + 'api/Article/GetByIssue/' + issueId)
+    getAllArticle(allTime: number): Observable<Article[]> {
+        return this.http.get(this.baseUrl + 'api/Article/GetByIssue/' + allTime)
             .map(response => response.json())
             .catch(this.handleError);
     }

@@ -51,11 +51,11 @@ export class IssuePageComponent {
         this.issueService.getIssue(issueId)
             .subscribe(data => {
                 this.issue = data;
+                this.articleService.getAllArticle(data.allTime)
+                    .subscribe(data => {
+                        this.articles = data;
+                    }, error => console.log('Could not load articles.'));
             }, error => console.log('Could not load issue.'));
-        this.articleService.getAllArticle(issueId)
-            .subscribe(data => {
-                this.articles = data;
-            }, error => console.log('Could not load articles.'));
     }
 
     addArticle(article: Article) {

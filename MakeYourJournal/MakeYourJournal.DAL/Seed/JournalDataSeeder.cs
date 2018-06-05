@@ -17,11 +17,11 @@ namespace MakeYourJournal.DAL.Seed
 
                 var Issues = data.Issues.ToDictionary(i => i.AllTime, i => new Issue
                 {
-                    Volume = i.Volume,
-                    Number = i.Number,
+                    AllTime = i.AllTime,
                     IssueDetails = new IssueDetails
                     {
-                        AllTime = i.AllTime,
+                        Volume = i.Volume,
+                        Number = i.Number,
                         Deadline = i.Deadline,
                         Name = i.Name,
                         Description = i.Description,

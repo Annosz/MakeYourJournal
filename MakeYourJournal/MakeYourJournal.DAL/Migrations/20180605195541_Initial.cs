@@ -56,19 +56,18 @@ namespace MakeYourJournal.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Number = table.Column<int>(nullable: false),
-                    Volume = table.Column<int>(nullable: false),
                     AllTime = table.Column<int>(nullable: false),
                     CopyNumber = table.Column<int>(nullable: false),
                     Deadline = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(maxLength: 500, nullable: true),
                     ExpectedPageCount = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(maxLength: 50, nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Number = table.Column<int>(nullable: false),
+                    Volume = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Issue", x => x.Id);
-                    table.UniqueConstraint("AK_Issue_Volume_Number", x => new { x.Volume, x.Number });
                     table.UniqueConstraint("AK_Issue_AllTime", x => x.AllTime);
                 });
 
@@ -184,7 +183,7 @@ namespace MakeYourJournal.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IssueId = table.Column<int>(nullable: false),
+                    IssueAllTime = table.Column<int>(nullable: false),
                     Title = table.Column<string>(maxLength: 100, nullable: false),
                     Topic = table.Column<string>(maxLength: 50, nullable: true)
                 },
@@ -192,10 +191,10 @@ namespace MakeYourJournal.DAL.Migrations
                 {
                     table.PrimaryKey("PK_Article", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Article_Issue_IssueId",
-                        column: x => x.IssueId,
+                        name: "FK_Article_Issue_IssueAllTime",
+                        column: x => x.IssueAllTime,
                         principalTable: "Issue",
-                        principalColumn: "Id",
+                        principalColumn: "AllTime",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -223,9 +222,9 @@ namespace MakeYourJournal.DAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Article_IssueId",
+                name: "IX_Article_IssueAllTime",
                 table: "Article",
-                column: "IssueId");
+                column: "IssueAllTime");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

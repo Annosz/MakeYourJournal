@@ -32,11 +32,11 @@ namespace MakeYourJournal.ANG.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{IssueId}")]
+        [Route("[action]/{AllTime}")]
         [ProducesResponseType(typeof(List<ArticleModel>), (int)HttpStatusCode.OK)]
-        public IActionResult GetByIssue(int IssueId)
+        public IActionResult GetByIssue(int AllTime)
         {
-            return Json(Mapper.Map<List<ArticleModel>>(ArticleService.GetArticlesByIssueId(IssueId)));
+            return Json(Mapper.Map<List<ArticleModel>>(ArticleService.GetArticlesByAllTimeNumber(AllTime)));
         }
 
         [HttpGet("{id}")]
