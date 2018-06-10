@@ -12,9 +12,10 @@ using System;
 namespace MakeYourJournal.DAL.Migrations
 {
     [DbContext(typeof(JournalDbContext))]
-    partial class JournalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180610185635_AddressOwnedType")]
+    partial class AddressOwnedType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,9 +156,6 @@ namespace MakeYourJournal.DAL.Migrations
                     b.Property<int>("Volume");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Volume", "Number")
-                        .IsUnique();
 
                     b.ToTable("Issue");
                 });

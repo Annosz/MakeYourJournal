@@ -41,8 +41,11 @@ namespace MakeYourJournal.DAL
                 .WithMany(i => i.Articles)
                 .HasForeignKey(a => a.IssueAllTime)
                 .HasPrincipalKey(i => i.AllTime);
-            /*modelBuilder.Entity<IssueDetails>()
-                .HasAlternateKey(i => new { i.Volume, i.Number });*/
+
+            //Indexes
+            modelBuilder.Entity<IssueDetails>()
+                .HasIndex(i => new { i.Volume, i.Number })
+                .IsUnique();
 
             //Table splitting
             modelBuilder.Entity<Issue>()
@@ -53,7 +56,11 @@ namespace MakeYourJournal.DAL
                 .HasKey(d => d.Id);
             modelBuilder.Entity<IssueDetails>()
                 .HasOne(d => d.Issue).WithOne(i => i.IssueDetails).HasForeignKey<Issue>(d => d.Id);
-            
+
+            //Owned Type
+            modelBuilder.Entity<ApplicationUser>()
+                .OwnsOne(u => u.Address);
+
             //TPH with named discriminator
             modelBuilder.Entity<Item>()
                 .HasDiscriminator<string>("ItemType");
