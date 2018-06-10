@@ -113,4 +113,8 @@ export class IssuePageComponent {
         this.navMenu.ngOnInit();
         this.router.navigateByUrl('/home'); 
     }
+
+    sendReminder(issueId: number) {
+        this.issueService.sendReminder(issueId);
+    }
 }

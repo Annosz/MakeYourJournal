@@ -39,6 +39,11 @@ export class IssueService {
             .subscribe(data => { }, error => console.error('Could not delete issue.'));
     }
 
+    sendReminder(issueId: number) {
+        this.http.get(this.baseUrl + 'api/Email/SendDeadlineReminder/' + issueId)
+            .subscribe(data => { }, error => console.error('Could not send reminder.'));
+    }
+
     private handleError(error: any): Observable<any> {
         console.error('An error occurred', error);
         return Observable.throw(error);

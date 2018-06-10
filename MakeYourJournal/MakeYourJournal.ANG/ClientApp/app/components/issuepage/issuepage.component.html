@@ -85,5 +85,10 @@
 </div>
 <hr />
 <div class="text-right">
-    <button class="btn btn-danger" type="button" (click)="deleteIssue(issueId)">Delete Issue</button>
+    <div>
+        <button class="btn btn-warning" type="button" (click)="sendReminder(issueId)">Send Reminder</button>
+    </div>
+    <div>
+        <button class="btn btn-danger" type="button" (click)="deleteIssue(issueId)">Delete Issue</button>
+    </div>
 </div>

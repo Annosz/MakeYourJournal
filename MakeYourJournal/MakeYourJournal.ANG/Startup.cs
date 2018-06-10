@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using MakeYourJournal.ANG.Middlewares;
+using MakeYourJournal.ANG.Services;
 using MakeYourJournal.DAL;
 using MakeYourJournal.DAL.Entities;
 using MakeYourJournal.DAL.Mapping;
@@ -44,6 +45,7 @@ namespace MakeYourJournal.ANG
             services.AddTransient<JournalSeedData>();
 
             services.AddSingleton<IMapper>(MapperConfig.Configure());
+            services.AddScoped<IEmailSender, EmailSender>();
 
             services.AddScoped<IIssueService, IssueService>();
             services.AddScoped<IArticleService, ArticleService>();
@@ -51,6 +53,8 @@ namespace MakeYourJournal.ANG
             services.AddScoped<INoteService, NoteService>();
 
             services.AddMvc();
+
+            services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
