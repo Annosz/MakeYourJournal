@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakeYourJournal.DAL", "Make
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakeYourJournal.ANG", "MakeYourJournal.ANG\MakeYourJournal.ANG.csproj", "{B3473F16-3244-4C3C-94B6-153D1B0FA4CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeYourJournal.Tests", "MakeYourJourlnal.Test2\MakeYourJournal.Tests.csproj", "{D1455010-547C-4F68-A7E3-2B18C82B0A92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B3473F16-3244-4C3C-94B6-153D1B0FA4CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3473F16-3244-4C3C-94B6-153D1B0FA4CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3473F16-3244-4C3C-94B6-153D1B0FA4CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1455010-547C-4F68-A7E3-2B18C82B0A92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1455010-547C-4F68-A7E3-2B18C82B0A92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1455010-547C-4F68-A7E3-2B18C82B0A92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1455010-547C-4F68-A7E3-2B18C82B0A92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

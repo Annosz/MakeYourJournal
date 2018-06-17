@@ -28,7 +28,7 @@ namespace MakeYourJournal.ANG.Controllers
         [ProducesResponseType(typeof(List<ArticleModel>), (int)HttpStatusCode.OK)]
         public IActionResult Get()
         {
-            return Json(Mapper.Map<List<ArticleModel>>(ArticleService.GetArticles()));
+            return Ok(Mapper.Map<List<ArticleModel>>(ArticleService.GetArticles()));
         }
 
         [HttpGet]
@@ -36,7 +36,7 @@ namespace MakeYourJournal.ANG.Controllers
         [ProducesResponseType(typeof(List<ArticleModel>), (int)HttpStatusCode.OK)]
         public IActionResult GetByIssue(int AllTime)
         {
-            return Json(Mapper.Map<List<ArticleModel>>(ArticleService.GetArticlesByAllTimeNumber(AllTime)));
+            return Ok(Mapper.Map<List<ArticleModel>>(ArticleService.GetArticlesByAllTimeNumber(AllTime)));
         }
 
         [HttpGet("{id}")]

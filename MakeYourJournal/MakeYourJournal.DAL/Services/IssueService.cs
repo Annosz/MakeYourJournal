@@ -42,24 +42,14 @@ namespace MakeYourJournal.DAL.Services
         public Issue UpdateIssue(int IssueId, Issue Issue)
         {
             Issue.Id = IssueId;
-            var entry = DbContext.Attach(Issue);
-            entry.State = EntityState.Modified;
-
-            try
-            {
-                DbContext.SaveChanges();
-                return GetIssue(Issue.Id);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw new EntityNotFoundException("Issue not found");
-            }
+            DeleteIssue(IssueId);
+            return AddIssue(Issue);
         }
 
         public void DeleteIssue(int IssueId)
         {
-            DbContext.Issues.Remove(new Issue { Id = IssueId });
-            DbContext.IssueDetails.Remove(new IssueDetails { Id = IssueId });
+            DbContext.Remove(DbContext.Issues.Where(i => i.Id == IssueId ).Single());
+            DbContext.Remove(DbContext.IssueDetails.Where(i => i.Id == IssueId).Single());
 
             try
             {

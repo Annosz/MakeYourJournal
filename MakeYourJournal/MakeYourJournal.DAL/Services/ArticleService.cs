@@ -46,23 +46,13 @@ namespace MakeYourJournal.DAL.Services
         public Article UpdateArticle(int ArticleId, Article Article)
         {
             Article.Id = ArticleId;
-            var entry = DbContext.Attach(Article);
-            entry.State = EntityState.Modified;
-
-            try
-            {
-                DbContext.SaveChanges();
-                return GetArticle(Article.Id);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw new EntityNotFoundException("Article not found");
-            }
+            DeleteArticle(ArticleId);
+            return AddArticle(Article);
         }
 
         public void DeleteArticle(int ArticleId)
         {
-            DbContext.Articles.Remove(new Article { Id = ArticleId });
+            DbContext.Remove(DbContext.Articles.Where(a => a.Id == ArticleId).Single());
 
             try
             {
