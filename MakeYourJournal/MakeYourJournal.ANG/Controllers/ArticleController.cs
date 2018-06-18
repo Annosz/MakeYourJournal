@@ -8,11 +8,14 @@ using MakeYourJournal.DAL.Dtos;
 using MakeYourJournal.DAL.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 namespace MakeYourJournal.ANG.Controllers
 {
+    [ApiVersion("1")]
+    [ApiVersion("2")]
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class ArticleController : Controller
     {
         public ArticleController(IArticleService articleService, IMapper mapper)
@@ -31,12 +34,20 @@ namespace MakeYourJournal.ANG.Controllers
             return Ok(Mapper.Map<List<ArticleModel>>(ArticleService.GetArticles()));
         }
 
-        [HttpGet]
-        [Route("[action]/{AllTime}")]
+        [HttpGet, MapToApiVersion("1.0")]
+        [Route("[action]/{Volume}/{Number}")]
         [ProducesResponseType(typeof(List<ArticleModel>), (int)HttpStatusCode.OK)]
-        public IActionResult GetByIssue(int AllTime)
+        public IActionResult GetByIssue(int Volume, int Number)
         {
-            return Ok(Mapper.Map<List<ArticleModel>>(ArticleService.GetArticlesByAllTimeNumber(AllTime)));
+            return Ok(Mapper.Map<List<ArticleModel>>(ArticleService.GetArticlesByIssueVolumeAndNumber(Volume, Number)));
+        }
+
+        [HttpGet, MapToApiVersion("2.0")]
+        [Route("[action]/{AllTimeNumber}")]
+        [ProducesResponseType(typeof(List<ArticleModel>), (int)HttpStatusCode.OK)]
+        public IActionResult GetByIssue(int AllTimeNumber)
+        {
+            return Ok(Mapper.Map<List<ArticleModel>>(ArticleService.GetArticlesByAllTimeNumber(AllTimeNumber)));
         }
 
         [HttpGet("{id}")]

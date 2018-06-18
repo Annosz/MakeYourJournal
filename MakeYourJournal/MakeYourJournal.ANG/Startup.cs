@@ -54,6 +54,8 @@ namespace MakeYourJournal.ANG
 
             services.AddMvc();
 
+            services.AddApiVersioning(o => o.AssumeDefaultVersionWhenUnspecified = true);
+
             services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
@@ -62,11 +64,11 @@ namespace MakeYourJournal.ANG
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                /*app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
                     HotModuleReplacement = true
-                });
+                });*/
             }
             else
             {

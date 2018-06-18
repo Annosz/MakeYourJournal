@@ -28,6 +28,14 @@ namespace MakeYourJournal.DAL.Services
             return ret;
         }
 
+        public IEnumerable<Article> GetArticlesByIssueVolumeAndNumber(int volume, int number)
+        {
+            var ret = DbContext.Articles.Include(a => a.Issue).ThenInclude(i => i.IssueDetails)
+                .Where(a => a.Issue.IssueDetails.Volume == volume && a.Issue.IssueDetails.Number == number)
+                .Include(a => a.Items).ToList();
+            return ret;
+        }
+
         public Article GetArticle(int articleId)
         {
             return DbContext.Articles.Include(a => a.Items).FirstOrDefault(a => a.Id == articleId)

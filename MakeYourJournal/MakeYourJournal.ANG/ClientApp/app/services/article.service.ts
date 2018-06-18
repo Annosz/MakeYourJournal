@@ -17,19 +17,19 @@ export class ArticleService {
     }
 
     getAllArticle(allTime: number): Observable<Article[]> {
-        return this.http.get(this.baseUrl + 'api/Article/GetByIssue/' + allTime)
+        return this.http.get(this.baseUrl + 'api/v2/Article/GetByIssue/' + allTime)
             .map(response => response.json())
             .catch(this.handleError);
     }
 
     addArticle(newArticle: Article): Observable<Article> {
-        return this.http.post(this.baseUrl + 'api/Article', JSON.stringify(newArticle), { headers: this.headers })
+        return this.http.post(this.baseUrl + 'api/v1/Article', JSON.stringify(newArticle), { headers: this.headers })
             .map(response => response.json())
             .catch(this.handleError);
     }
 
     deleteArticle(articleId: number) {
-        this.http.delete(this.baseUrl + 'api/Article/' + articleId)
+        this.http.delete(this.baseUrl + 'api/v1/Article/' + articleId)
             .subscribe(data => { }, error => console.error('Could not delete article.'));
     }
 
